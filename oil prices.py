@@ -25,8 +25,8 @@ df = pd.concat(dfs, axis=1)
 df_oil = df[['oil']].reset_index().rename(columns={'index': 'date'})
 df_oil['date'] = pd.to_datetime(df_oil['date'])
 
-# Convert daily → monthly using month-end timestamp
-df_oil['month'] = df_oil['date'].dt.to_period("M").dt.to_timestamp("M")
+# Convert daily → monthly using month-start timestamp
+df_oil['month'] = df_oil['date'].dt.to_period("M").dt.to_timestamp()
 
 oil_monthly = (
     df_oil.groupby('month')['oil']
@@ -49,3 +49,4 @@ oil_monthly.reset_index().assign(
     r"C:\Users\rucha\Downloads\Python & SQL\monthly_oil_prices1.csv",
     index=False
 )
+
