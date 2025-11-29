@@ -24,8 +24,8 @@ for name, sid in series.items():
 # Merge all consumer datasets
 consumer_df = pd.concat(consumer_dfs, axis=1)
 
-# Convert all series to monthly frequency (end of month)
-consumer_monthly = consumer_df.resample("M").last()
+# Convert all series to monthly frequency (start of month)
+consumer_monthly = consumer_df.resample("M").first()
 
 # Drop rows if any series missing
 consumer_monthly = consumer_monthly.dropna()
@@ -52,3 +52,4 @@ consumer_monthly.reset_index().assign(
     r"C:\Users\rucha\Downloads\Python & SQL\consumer_sentiment_fred1.csv",
     index=False
 )
+
